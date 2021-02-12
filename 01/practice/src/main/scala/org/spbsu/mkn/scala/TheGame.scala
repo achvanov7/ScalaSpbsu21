@@ -45,11 +45,6 @@ object TheGame {
     Incorrect(bulls, cows)
   }
 
-  def isIncorrect(guessResult: GuessResult): Boolean = guessResult match {
-    case _: Incorrect => true
-    case _ => false
-  }
-
   def main(args: Array[String]): Unit = {
     print("Enter your name: ")
     val name = readLine()
@@ -60,7 +55,7 @@ object TheGame {
     println(s"The string of length $lengthOfString has been guessed.")
     var guessResult: GuessResult = Incorrect(0, 0)
     var numTries = 0
-    while (isIncorrect(guessResult)) {
+    while (guessResult.isInstanceOf[Incorrect]) {
       print("Enter your next guess: ")
       val guess = readLine()
       guessResult = validate(guessedString, guess, numTries)
