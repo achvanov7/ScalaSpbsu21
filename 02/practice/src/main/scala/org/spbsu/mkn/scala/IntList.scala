@@ -47,9 +47,9 @@ case object IntNil extends IntList {
 }
 
 case class ::(override val head: Int, override val tail: IntList) extends IntList {
-  override def drop(n: Int): IntList = if (n == 0) this else tail.drop(n - 1)
+  override def drop(n: Int): IntList = if (n < 0) undef else if (n == 0) this else tail.drop(n - 1)
 
-  override def take(n: Int): IntList = if (n == 0) IntNil else head :: tail.take(n - 1)
+  override def take(n: Int): IntList = if (n < 0) undef else if (n == 0) IntNil else head :: tail.take(n - 1)
 
   override def map(f: Int => Int): IntList = f(head) :: tail.map(f)
 }
